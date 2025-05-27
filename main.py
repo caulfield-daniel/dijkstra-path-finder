@@ -2,6 +2,7 @@ import pygame
 from graph import Graph
 from settings import *
 
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -28,12 +29,16 @@ def main():
                     x, y = event.pos
                     graph.select_point((x, y))
 
-                    selected_points = [point for point in graph.points if point.selected]
+                    selected_points = [
+                        point for point in graph.points if point.selected
+                    ]
                     if len(selected_points) == 2:
                         start, end = selected_points
                         path = graph.dijkstra(start, end)
                         graph.shortest_path = path
-                        print(f"Кратчайший путь от {start.label} до {end.label}: {[point.label for point in path]} с расстоянием {graph.shortest_path_length}")
+                        print(
+                            f"Кратчайший путь от {start.label} до {end.label}: {[point.label for point in path]} с расстоянием {graph.shortest_path_length}"
+                        )
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_g:  # Генерация нового графа
@@ -46,6 +51,7 @@ def main():
         clock.tick(60)
 
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()
